@@ -1,0 +1,43 @@
+<div class="Login-form">
+
+
+  <form [formGroup]="loginFormGroup" >
+    <div class="logo">
+      <img class="logo-img" src="../../../assets/imgs/Blue_logo.png" alt="">
+    </div>
+
+    <div class="form-title">
+      <h1 >Log in to your Account</h1>
+      <p>Welcome back please enter your details .</p>
+    </div>
+
+    <div class="form-input">
+      <label class="label" for="floatingInput"> Email </label>
+      <input formControlName='email' type="text" name="email" class="form-control" id="floatingInput" placeholder="Enter your email">
+    </div>
+    <div class="form-input">
+      <label class="label" for="floatingPassword">Password</label>
+      <input formControlName="password" type="text" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+    </div>
+
+    <div class="validator" *ngIf="loginControl['email'].errors">
+      <div *ngIf="(isSummiting && loginControl['email'].errors['required'] ) || (loginControl['email'].touched && loginControl['email'].errors['required'] )">
+       Email required
+      </div>
+    </div>
+
+    <div class="validator" *ngIf="loginControl['password'].errors">
+      <div *ngIf="(isSummiting && loginControl['password'].errors['required'] ) || (loginControl['password'].touched && loginControl['email'].errors['required'] )">
+       password required
+      </div>
+    </div>
+
+
+
+
+    <button class="summit-btn" (click)="login()" >Sign in</button>
+
+  </form>
+
+
+</div>
