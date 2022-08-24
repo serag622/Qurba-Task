@@ -23,6 +23,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.getProductList()
     this.getCategoryList()
+    this.getSearchProduct()
   }
 
 
@@ -47,6 +48,7 @@ export class ProductListComponent implements OnInit {
     console.log(this.CategoryList)
   })
   }
+
 
   /** set number of pages*/
   SetPages(){
@@ -102,6 +104,25 @@ export class ProductListComponent implements OnInit {
     }
   }
 
+   }
+
+
+   /************* if search button is clicked ****************/
+   getSearchProduct(){
+    this.productsService.search.subscribe(res=>{
+      if(!res){
+        this.getProductList()
+      }
+      else{
+      this.isLoading=true
+       this.productsService.searchProductByName(res).subscribe((result : any)=>{
+        this.ProductList = result.products;
+        this.totalRecords = result.total
+        this.SetPages()
+        this.isLoading = false;
+       })
+      }
+    })
    }
 
  }

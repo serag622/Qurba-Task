@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../Models/product/Product.model';
 import { AuthService } from '../../Service/auth/auth-services.service';
 import { CartService } from '../../Service/Cart/Cart.service';
+import { ProductService } from '../../Service/product/product.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,10 @@ export class HeaderComponent implements OnInit {
   search : string = '';
   cart : Product[] = [];
 
-  constructor(private authService : AuthService, private cartService : CartService) { }
+  constructor(
+     private authService : AuthService,
+     private cartService : CartService,
+     private productService : ProductService) { }
 
 
   ngOnInit(): void {
@@ -45,7 +49,7 @@ export class HeaderComponent implements OnInit {
 
 
   SearchItem(){
-
+   this.productService.search.emit(this.search)
   }
 
 }

@@ -6,6 +6,7 @@ export const ApiRoutes = {
   list : 'products',
   categories : 'products/categories',
   productByCategory :'products/category/',
+  search : 'products/search?q='
  }
 
 
