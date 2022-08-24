@@ -10,10 +10,13 @@ import { ProductService } from 'src/app/Shared/Service/product/product.service';
 export class ProductListComponent implements OnInit {
 
   isLoading : boolean = false;
-  ProductList !: Product[]
+  ProductList : Product[] = []
   filter : ProductFilter = {skip: 0, limit:20}
   totalRecords !: number;
   CategoryList !: string[]
+  NumOfPages : number[] =[];
+  currentPage :number = 0;
+  SelectedCategoryProducts :Product[] =[]
 
   constructor(private productsService: ProductService) { }
 
@@ -26,10 +29,12 @@ export class ProductListComponent implements OnInit {
   /** get list of products*/
   getProductList(){
     this.isLoading = true;
+    this.NumOfPages=[]
    this.productsService.getProductList(this.filter).subscribe((res : any) => {
     console.log(res)
     this.ProductList = res.products;
     this.totalRecords = res.total
+    this.SetPages()
     this.isLoading = false;
    })
   }
@@ -42,4 +47,61 @@ export class ProductListComponent implements OnInit {
   })
   }
 
-}
+  SetPages(){
+    this.NumOfPages=[]
+    const numberofpages = Math.ceil(this.totalRecords / this.filter.limit)
+    for(let i = 0; i < numberofpages; i++) {
+      this.NumOfPages.push(i+1);
+    }
+  }
+
+  onPagenation(i : number){
+    if( i > -1 && i < this.NumOfPages.length ) {
+      this.currentPage =i;
+      this.filter.skip = this.filter.limit * i;
+      this.getProductList();
+    }
+  }
+
+
+ selectCategory(event :any){
+   console.log(event.target.checked);
+   console.log(event.target.value);
+
+   if( event.target.checked){
+    this.isLoading = true
+    this.productsService.getProductByCategory(event.target.value).subscribe((result : any) =>{
+       result?.products?.forEach((product : Product)=>{
+        this.SelectedCategoryProducts.push(product)
+       })
+       this.ProductList = this.SelectedCategoryProducts;
+       this.totalRecords = result?.total
+       this.SetPages()
+       this.isLoading = false
+    })
+
+   }
+   else if(! event.target.checked){
+
+    this.SelectedCategoryProducts = this.SelectedCategoryProducts.filter((p: Product )=>{console.log('ok'); return p.category != event.target.value;})
+
+    if( this.SelectedCategoryProducts.length == 0 ){
+      console.log('array 0')
+      this.filter.skip =0;
+      this.currentPage =0;
+      this.getProductList()
+    }
+    else{
+      this.isLoading = true
+    console.log('new array')
+    this.ProductList= this.SelectedCategoryProducts
+    this.SetPages()
+    this.isLoading= false
+    }
+  }
+
+   }
+
+ }
+
+

@@ -38,3 +38,38 @@ border-radius: 5px;
 .product{
  margin: 10px;
 }
+
+.pagination{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  flex-wrap: wrap;
+  font-size:35px
+}
+
+.paging{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  flex-wrap: wrap;
+}
+
+.paging__arrow{
+  border: 2px solid gray;
+  border-radius : 5px;
+  padding:4px 8px;
+  cursor: pointer;
+}
+
+.paging__number{
+  border: 2px solid gray;
+  border-radius : 5px;
+  margin: 0px 5px;
+  padding: 4px 8px ;
+  cursor: pointer;
+}
+
+.active{
+  color: #fff;
+  background-color:#000
+}

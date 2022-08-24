@@ -4,7 +4,8 @@ export const ApiRoutes = {
 
  product:{
   list : 'products',
-  categories : 'products/categories'
+  categories : 'products/categories',
+  productByCategory :'products/category/',
  }
 
 

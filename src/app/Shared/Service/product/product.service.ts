@@ -21,4 +21,8 @@ export class ProductService {
   getCategoryList(){
     return this.http.get(this.apiUrl+ApiRoutes.product.categories)
   }
+
+  getProductByCategory(category :string){
+    return this.http.get(this.apiUrl+ApiRoutes.product.productByCategory+category)
+  }
 }

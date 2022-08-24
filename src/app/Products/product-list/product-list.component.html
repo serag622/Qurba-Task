@@ -10,20 +10,37 @@
      <div class="category-content">
       <h4>Products</h4>
       <div *ngFor="let category of CategoryList" class="col-16 category">
-        <input type="checkbox" name="category" [value]='category' class="input-control" />
+        <input type="checkbox" name="category" [value]='category' class="input-control" (change)="selectCategory($event)" />
         <span class="">{{category}}</span>
       </div>
       </div>
     </div>
 
-    <div class="col-12 product-list">
-
+    <div class="col-12 product-list" *ngIf="!isLoading">
       <div *ngFor="let product of ProductList" class="col-3 product">
          <app-product-item [product]="product" ></app-product-item>
       </div>
 
+      <!--- pagination --->
+      <div class=" pagination col-16">
+        <div class="paging ">
+          <!-- left arrow -->
+          <div class="paging__arrow border" (click)="onPagenation(currentPage -1)">
+            prev
+         </div>
+
+          <!-- page number -->
+          <div class="paging__number mx-2 border border-1 border-secondary "  *ngFor ="let page of NumOfPages , let i = index" [ngClass]="{'active': currentPage == i }" (click)="onPagenation(i)">{{page}}</div>
+
+          <!-- right arrow -->
+          <div class="paging__arrow border border-1 border-secondary" (click)="onPagenation(currentPage +1)">
+            next
+        </div>
+      </div>
+    </div>
 
     </div>
 
+    <app-loader class="col-12" *ngIf="isLoading"></app-loader>
   </div>
 </div>
