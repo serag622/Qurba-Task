@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../../Models/product/Product.model';
 import { AuthService } from '../../Service/auth/auth-services.service';
+import { CartService } from '../../Service/Cart/Cart.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +12,14 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn : boolean ;
   search : string = '';
-  cart : number = 0;
+  cart : Product[] = [];
 
-  constructor(private authService : AuthService) { }
+  constructor(private authService : AuthService, private cartService : CartService) { }
 
 
   ngOnInit(): void {
     this.getLoggedIn()
+    this.getCartItems()
   }
 
   /************ get is user is logged in ****************/
@@ -32,6 +35,14 @@ export class HeaderComponent implements OnInit {
   LogOut(){
     this.authService.logout()
   }
+
+  /************ get user to log out ****************/
+  getCartItems(){
+    this.cartService.AddToCart.subscribe(response => {
+      this.cart.push(response)
+    })
+  }
+
 
   SearchItem(){
 

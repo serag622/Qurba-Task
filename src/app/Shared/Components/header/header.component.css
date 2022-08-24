@@ -79,3 +79,12 @@ li a:hover {
 .user-account{
   cursor: pointer;
 }
+
+.badge{
+  background-color:#007bc8;
+  padding: 7px;
+  color : #fff;
+  font-size: 14px;
+  border-radius: 7px;
+
+}

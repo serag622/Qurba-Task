@@ -12,7 +12,7 @@ export class ProductListComponent implements OnInit {
   isLoading : boolean = false;
   ProductList : Product[] = []
   filter : ProductFilter = {skip: 0, limit:20}
-  totalRecords !: number;
+  totalRecords !: number ;
   CategoryList !: string[]
   NumOfPages : number[] =[];
   currentPage :number = 0;
@@ -39,6 +39,7 @@ export class ProductListComponent implements OnInit {
    })
   }
 
+  /** get list of categories*/
   getCategoryList(){
     this.isLoading = true;
   this.productsService.getCategoryList().subscribe((res : any) => {
@@ -47,6 +48,7 @@ export class ProductListComponent implements OnInit {
   })
   }
 
+  /** set number of pages*/
   SetPages(){
     this.NumOfPages=[]
     const numberofpages = Math.ceil(this.totalRecords / this.filter.limit)
