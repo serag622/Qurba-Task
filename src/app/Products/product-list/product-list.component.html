@@ -1,1 +1,29 @@
-<p>product-list works!</p>
+<div class="container">
+  <div class="product-title">
+    <h1>IPHONE</h1>
+    <h4>Home/Product/list</h4>
+  </div>
+
+  <div class="row">
+
+    <div class="col-4 category-list">
+     <div class="category-content">
+      <h4>Products</h4>
+      <div *ngFor="let category of CategoryList" class="col-16 category">
+        <input type="checkbox" name="category" [value]='category' class="input-control" />
+        <span class="">{{category}}</span>
+      </div>
+      </div>
+    </div>
+
+    <div class="col-12 product-list">
+
+      <div *ngFor="let product of ProductList" class="col-3 product">
+         <app-product-item [product]="product" ></app-product-item>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="card">
+  <img [src]="product.images[0]" alt="Denim Jeans" >
+  <span class="sale-badge">-{{product.discountPercentage}}%</span>
+  <h4 class="card-title">{{product.title}}</h4>
+
+  <div class="card-content">
+    <p>Brand: {{product.brand}}</p>
+    <p>Category: {{product.category}}</p>
+  </div>
+
+  <div class="price">
+    <p class="old-price"> {{product.price}} USD</p>
+    <p>  {{ product.price - product.price * (product.discountPercentage / 100) }} USD </p>
+
+  </div>
+
+  <p>in Stock : {{product.stock}}</p>
+  <p><button>Add to Cart</button></p>
+</div>

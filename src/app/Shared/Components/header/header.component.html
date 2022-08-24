@@ -1,1 +1,37 @@
-<p>header works!</p>
+<nav>
+
+  <ul>
+    <li>
+      <div class="brand">
+        <img src="../../../../assets/imgs/Blue_logo.png">
+        <h3>ClickTik</h3>
+      </div>
+   </li>
+
+    <li><a routerLink="/">Home</a></li>
+
+    <li class="nav-details">
+      <a *ngIf="!isLoggedIn" routerLink="/login">
+        Login
+      </a>
+
+      <div *ngIf="isLoggedIn" class="isLoged">
+
+        <div class="search-bar col-8">
+          <input type="text" class="form-control" name="search" [(ngModel)]="search" placeholder="Search...">
+          <button class="search-btn" (click)="SearchItem()">Search</button>
+        </div>
+
+        <div class="cart col-4 ">
+          <p> cart {{cart}} </p>
+        </div>
+
+        <div (click)="LogOut()" class="user-account col-4" >
+          account
+        </div>
+
+      </div>
+    </li>
+  </ul>
+
+</nav>

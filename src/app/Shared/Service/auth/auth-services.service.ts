@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../../environments/environment.prod";
 import { ApiRoutes } from "../../Models/app/ApiRoutes";
 import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
@@ -20,15 +20,24 @@ export class AuthService {
 
 
   UserLogin(data : any){
-    // return this.http.post(this.apiUrl+ApiRoutes.login,data).pipe(tap((response: any) => {
-    //   if(response.status === 'success'){
-    //     localStorage.setItem('token', response.authorisation.token);
-    //     this.setIsLoggedIn(true);
-    //     this.router.navigate([AppRoutes.Product.full]);
-    //   }
-    // }))
 
-    return this.http.post('https://dummyjson.com/auth/login',JSON.stringify(data),{headers: {'Content-Type': 'application/json'}})
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+     });
+   let options = { headers: headers };
+
+    return this.http.post(this.apiUrl+ApiRoutes.login,data,options).pipe(tap((response: any) => {
+      console.log(response)
+      if(response){
+        localStorage.setItem('token', response.token);
+        this.setIsLoggedIn(true);
+        this.router.navigate([AppRoutes.Product.full]);
+      }
+    }))
+
+
+
+    // return this.http.post('https://dummyjson.com/auth/login',data,options)
 
   }
 

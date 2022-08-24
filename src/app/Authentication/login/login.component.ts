@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginFormGroup!: FormGroup;
   isSummiting: boolean = false;
+  errorMsg: string=''
 
   constructor(
    private authService: AuthService,
@@ -22,13 +23,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.loginControl)
   }
 
   //init form properties
   initForm(){
     this.loginFormGroup = this.formBuilder.group({
-      email:[null, Validators.required],
+      username:[null, Validators.required],
       password:[null, Validators.required],
     })
 
@@ -45,16 +45,14 @@ export class LoginComponent implements OnInit {
     {
       return;
     }
-    let form = new FormData() ;
-    form.append('username', this.loginFormGroup.get('email')?.value);
-    form.append('password', this.loginFormGroup.get('password')?.value);
 
-    this.authService.UserLogin(form).subscribe((rea :any)=>{
-      console.log(rea)
-      this.isSummiting=false;
-
-    }, (err)=>{
-      console.log(err)
+    this.authService.UserLogin(this.loginFormGroup.value).subscribe(res => {
+      console.log(res)
+    }, err => {
+      this.errorMsg='you entered invalid username or password';
+      setTimeout(() =>{
+        this.errorMsg=''
+      },5000)
     })
   }
 

@@ -4,6 +4,8 @@ import { RouterModule } from "@angular/router";
 import { ContentLayoutComponent } from './Components/content-layout/content-layout.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { LoaderComponent } from './Components/loader/loader.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -11,12 +13,15 @@ import { FooterComponent } from './Components/footer/footer.component';
   declarations: [
     ContentLayoutComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  exports: [HeaderComponent]
+  exports: [HeaderComponent,FooterComponent,LoaderComponent]
 })
 export class SharedModule { }

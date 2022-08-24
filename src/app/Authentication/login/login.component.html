@@ -12,26 +12,30 @@
     </div>
 
     <div class="form-input">
-      <label class="label" for="floatingInput"> Email </label>
-      <input formControlName='email' type="text" name="email" class="form-control" id="floatingInput" placeholder="Enter your email">
+      <label class="label" for="floatingInput"> Username </label>
+      <input formControlName='username' type="text" name="email" class="form-control" id="floatingInput" placeholder="Enter your email">
     </div>
+
+    <div class="validator" *ngIf="loginControl['username']?.errors">
+      <div *ngIf="(isSummiting && loginControl['username']?.errors['required'] ) || (loginControl['username'].touched && loginControl['username'].errors['required'] )">
+       Username required
+      </div>
+    </div>
+
     <div class="form-input">
       <label class="label" for="floatingPassword">Password</label>
       <input formControlName="password" type="text" name="password" class="form-control" id="floatingPassword" placeholder="Password">
     </div>
 
-    <div class="validator" *ngIf="loginControl['email'].errors">
-      <div *ngIf="(isSummiting && loginControl['email'].errors['required'] ) || (loginControl['email'].touched && loginControl['email'].errors['required'] )">
-       Email required
-      </div>
-    </div>
-
-    <div class="validator" *ngIf="loginControl['password'].errors">
-      <div *ngIf="(isSummiting && loginControl['password'].errors['required'] ) || (loginControl['password'].touched && loginControl['email'].errors['required'] )">
+    <div class="validator" *ngIf="loginControl['password']?.errors">
+      <div *ngIf="(isSummiting && loginControl['password']?.errors['required'] ) || (loginControl['password']?.touched && loginControl['password'].errors['required'] )">
        password required
       </div>
     </div>
 
+    <div class="validator" *ngIf="isSummiting && errorMsg">
+      <p> {{errorMsg}}</p>
+    </div>
 
 
 

@@ -7,6 +7,7 @@ import { SharedModule } from "./Shared/shared.module";
 import {Interceptor} from './Shared/helper/interceptors/Interceptor'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationModule } from './Authentication/authentication.module';
+import { ProductModule } from './Products/product.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuthenticationModule } from './Authentication/authentication.module';
     AuthenticationModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProductModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
